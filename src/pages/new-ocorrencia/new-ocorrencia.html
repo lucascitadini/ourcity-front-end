@@ -1,0 +1,37 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Nova Ocorrência</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+  <form [formGroup]="formGroup" (ngSubmit)="newOcorrencia(); $event.preventDefault()">
+    <ion-list>
+      <ion-item *ngIf="picture">
+        <img [src]="picture">
+      </ion-item>
+      <ion-item>
+        <button ion-button block (click)="getCameraPicture()" [disabled]="cameraOn">Camera</button>
+        <button ion-button block (click)="getGalleryPicture()" [disabled]="cameraOn">Galeria</button>
+        <button *ngIf="picture" ion-button outline block (click)="cancel()">Descartar imagem</button>
+      </ion-item>
+      <ion-item>
+        <ion-label stacked>Descrição*</ion-label>
+        <ion-input formControlName="descricao" type="text"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label stacked>Endereço Completo*</ion-label>
+        <ion-input formControlName="enderecoCompleto" type="text"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label stacked>Categoria*</ion-label>
+        <ion-select formControlName="categoriaId">
+          <ion-option *ngFor="let categoria of categorias; first as c" [value]="categoria.id" [selected]="c">{{categoria.nome}}</ion-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
+    <button ion-button block type="submit" [disabled]="formGroup.invalid && picture">Reportar Ocorrência</button>
+  </form>
+</ion-content>

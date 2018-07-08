@@ -1,0 +1,45 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Ocorrencia</ion-title>
+    <ion-buttons end *ngIf="item?.idUsuario == usuario?.id">
+        <button ion-button icon-only color="royal" (click)="remover()">
+          <ion-icon name="trash" color="danger"></ion-icon>
+        </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-card>
+    <ion-item>
+      <ion-avatar item-start>
+          <img [src]="item?.imageUrlUsuario || 'assets/imgs/avatar-blank.png'"  >
+      </ion-avatar>
+      <h2>{{ item?.nomeUsuario }}</h2>
+      <p>{{ item?.dataCriacao }}</p>
+    </ion-item>
+    
+    <img src="{{item?.imageUrl}}" >
+
+    <ion-card-content>
+      <p>{{ item?.descricao }}</p>
+    </ion-card-content>
+
+    <ion-row>
+      <ion-col>
+        <button ion-button icon-left clear small>
+          <ion-icon name="thumbs-up"></ion-icon>
+          <div>{{ item?.totalApoios }} Apoiadores</div>
+        </button>
+      </ion-col>
+      <ion-col>
+        <button ion-button icon-left clear small (click)="openComentarios(item.id)">
+          <ion-icon name="text"></ion-icon>
+          <div>{{ item?.totalComentarios }} Comentários</div>
+        </button>
+      </ion-col>
+    </ion-row>
+
+  </ion-card>
+</ion-content>

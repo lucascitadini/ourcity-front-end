@@ -1,0 +1,53 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Search</ion-title>
+  </ion-navbar>
+
+  <ion-toolbar>
+    <ion-item>
+      <ion-icon item-start name="search"></ion-icon>
+      <ion-input type="text" placeholder="Endereço" [(ngModel)]="enderecoSearch" ></ion-input>
+      <ion-buttons item-end>
+        <button ion-button clear (click)="procurar()">
+          <ion-icon name="send"></ion-icon>
+        </button>
+      </ion-buttons>
+    </ion-item>
+  </ion-toolbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-card *ngFor="let item of items" >
+    <button ion-item (click)="openItem(item.id)" >
+      <ion-item>
+        <ion-avatar item-start>
+            <img [src]="item?.imageUrlUsuario || 'assets/imgs/avatar-blank.png'"  >
+        </ion-avatar>
+        <h2>{{ item.nomeUsuario }}</h2>
+        <p>{{ item.dataCriacao }}</p>
+      </ion-item>
+      <p>{{ item.enderecoCompleto }}</p>
+      <img src="{{item.imageUrl}}" >
+    
+      <ion-card-content>
+        <p>{{ item.descricao }}</p>
+      </ion-card-content>
+    </button>
+    <ion-row>
+      <ion-col>
+        <ion-icon name="thumbs-up"></ion-icon>
+        <div>{{ item.totalApoios }} Apoiadores</div>
+      </ion-col>
+      <ion-col>
+        <ion-icon name="text"></ion-icon>
+        <div>{{ item.totalComentarios }} Comentários</div>
+      </ion-col>
+    </ion-row>
+  </ion-card>
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>
